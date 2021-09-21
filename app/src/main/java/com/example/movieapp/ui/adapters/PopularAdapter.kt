@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
 import com.example.movieapp.models.ResultPopular
-import kotlinx.android.synthetic.main.new_release_list.view.*
+import kotlinx.android.synthetic.main.list_popular.view.*
 
 class PopularAdapter(private val items:ArrayList<ResultPopular>): RecyclerView.Adapter<PopularAdapter.MyViewHolder>(){
     override fun onCreateViewHolder(

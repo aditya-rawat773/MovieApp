@@ -88,7 +88,7 @@ class HomeFragment : Fragment() {
                     // hideProgressBar()
                     it.data?.let { response ->
                         listNewRelease.addAll(response.results)
-                        Log.d("adi", "onViewCreated: $listNewRelease")
+                        Log.d("aditya", "onViewCreated: $listNewRelease")
                         mNewReleaseAdapter.notifyDataSetChanged()
 
                     }
@@ -117,7 +117,7 @@ class HomeFragment : Fragment() {
                     it.data?.let { response ->
                         listTrending.addAll(response.results)
                         Log.d("aditya", "onViewCreated: $listTrending")
-                        mNewReleaseAdapter.notifyDataSetChanged()
+                        mTrendingAdapter.notifyDataSetChanged()
 
                     }
                 }
@@ -145,8 +145,8 @@ class HomeFragment : Fragment() {
                     // hideProgressBar()
                     it.data?.let { response ->
                         listPopular.addAll(response.results)
-                        Log.d("adi", "onViewCreated: $listPopular")
-                        mNewReleaseAdapter.notifyDataSetChanged()
+                        Log.d("aditya", "onViewCreated: $listPopular")
+                        mPopularAdapter.notifyDataSetChanged()
 
                     }
                 }

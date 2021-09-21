@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
 import com.example.movieapp.models.ResultTrending
-import kotlinx.android.synthetic.main.new_release_list.view.*
+import kotlinx.android.synthetic.main.list_trending.view.*
 
 class TrendingAdapter(private var items: ArrayList<ResultTrending>): RecyclerView.Adapter<TrendingAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(
