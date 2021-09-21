@@ -1,5 +1,6 @@
 package com.example.movieapp.ui
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,9 +14,10 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class HomeViewModel(
-    private val movieRepository: MovieRepository):ViewModel() {
+    private val movieRepository: MovieRepository
+    ):ViewModel() {
 
-    private val latestMovieData: MutableLiveData<Resource<NewReleaseResponse>> = MutableLiveData()
+    private val newReleaseMovieData: MutableLiveData<Resource<NewReleaseResponse>> = MutableLiveData()
     private var mNewReleaseMovieResponse: NewReleaseResponse? = null
 
     private val trendingMovieData: MutableLiveData<Resource<TrendingResponse>> = MutableLiveData()
@@ -26,8 +28,8 @@ class HomeViewModel(
 
 
 
-    fun getLatestPostObserver(): MutableLiveData<Resource<NewReleaseResponse>> {
-        return latestMovieData
+    fun getNewReleaseMoviePostObserver(): MutableLiveData<Resource<NewReleaseResponse>> {
+        return newReleaseMovieData
     }
 
     fun getTrendingPostObserver(): MutableLiveData<Resource<TrendingResponse>> {
@@ -39,11 +41,12 @@ class HomeViewModel(
     }
 
 
-    fun getLatestMovieData(){
-        latestMovieData.postValue(Resource.Loading())
+    fun getNewReleaseMovieData(){
+        newReleaseMovieData.postValue(Resource.Loading())
         viewModelScope.launch (Dispatchers.IO) {
-            val response = movieRepository.getLatestMovies()
-            latestMovieData.postValue(handleLatestResponse(response))
+            val response = movieRepository.getNewReleaseMovies()
+            Log.d("adi", "getNewReleaseMovieData: $response")
+            newReleaseMovieData.postValue(handleLatestResponse(response))
         }
     }
 
@@ -65,9 +68,11 @@ class HomeViewModel(
 
     private fun handleLatestResponse(response: Response<NewReleaseResponse>): Resource<NewReleaseResponse>? {
         if (response.isSuccessful){
+            Log.d("adi", "handleLatestResponse: ${response.body()}")
             response.body()?.let {
                 if(mNewReleaseMovieResponse == null){
                     mNewReleaseMovieResponse = it
+                    Log.d("adi", "handleLatestResponse: $it")
                 } else {
                     val oldList = mNewReleaseMovieResponse?.results
                     val newList = it.results
