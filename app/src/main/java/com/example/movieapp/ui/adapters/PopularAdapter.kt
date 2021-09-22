@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.movieapp.R
 import com.example.movieapp.models.ResultPopular
+import com.example.movieapp.utils.Utils
 import kotlinx.android.synthetic.main.list_popular.view.*
 
 class PopularAdapter(private val items:ArrayList<ResultPopular>): RecyclerView.Adapter<PopularAdapter.MyViewHolder>(){
@@ -29,11 +31,11 @@ class PopularAdapter(private val items:ArrayList<ResultPopular>): RecyclerView.A
 
     inner class MyViewHolder(view: View):RecyclerView.ViewHolder(view) {
 
-        private var tvTitle = view.title
+        private var ivTitle = view.iv_title
 
         fun bind(data: ResultPopular){
-
-            tvTitle.text = data.title
+            val url = Utils.POSTER_BASE_URL +data.poster_path
+            Glide.with(ivTitle).load(url).into(ivTitle)
         }
 
     }
